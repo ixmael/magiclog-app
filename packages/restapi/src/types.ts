@@ -6,6 +6,7 @@ import { UserRepositoryInterface } from './core/domain/user/repository';
  */
 export type APIServices = {
   userService: UserServiceInterface;
+  logger: any;
 };
 
 /**

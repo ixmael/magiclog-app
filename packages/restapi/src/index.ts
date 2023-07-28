@@ -1,8 +1,8 @@
 import express from 'express';
 
-import restapiRoutes from './restapi';
-
 import initializeServices from './initilizeServices';
+
+import restapiRoutes from './restapi';
 
 /**
  * Initilize the services and the RestAPI server

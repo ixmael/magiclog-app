@@ -1,5 +1,5 @@
-import { UserRepositoryInterface } from '@/core/domain/user/repository';
-import { UserType } from '@/core/domain/user/user';
+import { UserRepositoryInterface } from '../../../../core/domain/user/repository';
+import { UserType } from '../../../../core/domain/user/user';
 
 import getByEmail from './getByEmail';
 import storeAnUser from './storeAnUser';
@@ -11,7 +11,7 @@ import storeAnUser from './storeAnUser';
  */
 const UserRepositoryInMemory = (storage: Map<string, UserType>): UserRepositoryInterface => {
   return {
-    getByEmail: (email: string): Promise<UserType> => getByEmail(email, storage),
+    getByEmail: (email: string): Promise<UserType | null> => getByEmail(email, storage),
     storeAnUser: (user: UserType): Promise<boolean> => storeAnUser(user, storage),
   } as UserRepositoryInterface;
 };

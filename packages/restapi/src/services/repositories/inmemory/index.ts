@@ -1,4 +1,4 @@
-import { UserType } from '@/core/domain/user/user';
+import { UserType } from '../../../core/domain/user/user';
 
 import { RepositoriesServices } from '../../../types';
 
