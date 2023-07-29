@@ -5,6 +5,7 @@ import UserService, { UserServiceServicesType } from './core/services/user';
 import initRepositories from './services/repositories/inmemory';
 
 import { APIServices, RepositoriesServices } from './types';
+import ProductService, { ProductServiceServicesType } from './core/services/product';
 
 /**
  * Init the services required by the app
@@ -24,9 +25,16 @@ const initializeServices = async (): Promise<APIServices> => {
   } as UserServiceServicesType;
   const userService = UserService(userRequiredServices);
 
+  const productRequiredServices: ProductServiceServicesType = {
+    repository: repositories.productRepository,
+    logger: logger,
+  } as ProductServiceServicesType;
+  const productService = ProductService(productRequiredServices);
+
   return {
-    userService,
     logger,
+    productService,
+    userService,
   } as APIServices;
 };
 

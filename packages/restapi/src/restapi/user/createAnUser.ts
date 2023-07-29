@@ -21,24 +21,20 @@ const createAnUser = async (request: express.Request, response: express.Response
   if (!(requestUserData.hasOwnProperty('email')
     && requestUserData.hasOwnProperty('password')
     && requestUserData.hasOwnProperty('passwordToMatch'))) {
-    response
+    return response
       .status(400)
       .json({
         message: 'The json data is not valid',
       });
-
-    return;
   }
 
   // Validate that the passwords match
   if (requestUserData.password !== requestUserData.passwordToMatch) {
-    response
+    return response
       .status(400)
       .json({
         message: 'The password is invalid',
       });
-
-    return;
   }
 
   // Get the services
@@ -70,16 +66,10 @@ const createAnUser = async (request: express.Request, response: express.Response
     });
 
   if (userWasCreated) {
-    response
+    return response
       .status(201)
       .json({
         message: `The user with the email '${userWasCreated.email} was created'`,
-      });
-  } else {
-    response
-      .status(500)
-      .json({
-        message: 'An unknown error occurred'
       });
   }
 };

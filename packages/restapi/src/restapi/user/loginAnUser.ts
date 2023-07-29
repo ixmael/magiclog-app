@@ -65,12 +65,13 @@ const loginAnUser = async (request: express.Request, response: express.Response)
 
   if (userLogged) {
     // Generate the JWT
-    const accessToken = jwt.sign({
-      id: userLogged.id,
-      name: userLogged.email,
-    }, process.env.RESTAPI_TOKEN as string);
+    const user = {
+      id: userLogged.email,
+      email: userLogged.email,
+    };
+    const accessToken = jwt.sign(user, process.env.RESTAPI_TOKEN as string, { expiresIn: '3600s' });
 
-    response
+    return response
       .header('auth-token', accessToken)
       .status(200)
       .json({
@@ -78,7 +79,6 @@ const loginAnUser = async (request: express.Request, response: express.Response)
           token: accessToken,
         },
       });
-    return;
   }
 };
 
