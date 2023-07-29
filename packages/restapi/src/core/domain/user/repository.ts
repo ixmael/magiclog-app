@@ -1,4 +1,6 @@
-import { UserType } from './user';
+import {
+  UserType,
+} from './user';
 
 /**
  * This represents the expectation of a UserRepository implementation

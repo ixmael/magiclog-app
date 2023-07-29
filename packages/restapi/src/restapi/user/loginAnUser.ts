@@ -1,13 +1,18 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-import { UserType } from '@/core/domain/user/user';
+import {
+  UserType,
+} from '@/core/domain/user/user';
+
 import {
   EmailNotExistsError,
   PasswordIsInvalidError,
 } from '../../core/domain/user/errors';
 
-import { APIServices } from 'types';
+import {
+  APIServices,
+} from 'types';
 
 /**
  * Login an user and provide the token

@@ -1,11 +1,19 @@
 import pino from 'pino';
 
-import UserService, { UserServiceServicesType } from './core/services/user';
+import UserService, {
+  UserServiceServicesType,
+} from './core/services/user';
 
 import initRepositories from './services/repositories/inmemory';
 
-import { APIServices, RepositoriesServices } from './types';
-import ProductService, { ProductServiceServicesType } from './core/services/product';
+import {
+  APIServices,
+  RepositoriesServices,
+} from './types';
+
+import ProductService, {
+  ProductServiceServicesType,
+} from './core/services/product';
 
 /**
  * Init the services required by the app

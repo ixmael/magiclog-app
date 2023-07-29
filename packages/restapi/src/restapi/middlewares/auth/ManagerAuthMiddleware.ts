@@ -5,7 +5,7 @@ import {
   APIServices,
 } from 'types';
 
-const AuthMiddleware = (request: express.Request, response: express.Response, next: express.NextFunction) => {
+const ManagerAuthMiddleware = (request: express.Request, response: express.Response, next: express.NextFunction) => {
   const services: APIServices = request.app.get('services');
 
   const authorizationHeader = request.header('Authorization');
@@ -29,4 +29,4 @@ const AuthMiddleware = (request: express.Request, response: express.Response, ne
   });
 };
 
-export default AuthMiddleware;
+export default ManagerAuthMiddleware;

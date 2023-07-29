@@ -1,13 +1,17 @@
 import { compareSync } from 'bcrypt';
 
-import { UserType } from '../../../domain/user/user';
+import {
+  UserType,
+} from '../../../domain/user/user';
 
 import {
   EmailNotExistsError,
   PasswordIsInvalidError,
 } from '../../../domain/user/errors';
 
-import { UserServiceServicesType } from '../index';
+import {
+  UserServiceServicesType,
+} from '../index';
 
 /**
  * Login an user

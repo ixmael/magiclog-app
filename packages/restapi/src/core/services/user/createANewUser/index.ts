@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 
-import { UserType } from '../../../domain/user/user';
+import {
+  UserType,
+} from '../../../domain/user/user';
 
 import {
   InvalidUserDataError,

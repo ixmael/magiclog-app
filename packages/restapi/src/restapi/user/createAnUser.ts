@@ -1,12 +1,17 @@
 import express from 'express';
 
-import { UserType } from '@/core/domain/user/user';
+import {
+  UserType,
+} from '@/core/domain/user/user';
+
 import {
   InvalidUserDataError,
   EmailExistsError,
 } from '../../core/domain/user/errors';
 
-import { APIServices } from 'types';
+import {
+  APIServices,
+} from 'types';
 
 /**
  * Create a new user

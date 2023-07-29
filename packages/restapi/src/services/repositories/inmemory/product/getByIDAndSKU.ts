@@ -1,4 +1,6 @@
-import { ProductType } from '../../../../core/domain/product';
+import {
+  ProductType,
+} from '../../../../core/domain/product';
 
 /**
  * Fetch the product with the SKU and the ID given

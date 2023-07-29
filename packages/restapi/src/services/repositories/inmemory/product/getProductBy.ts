@@ -1,4 +1,6 @@
-import { ProductType } from '../../../../core/domain/product';
+import {
+  ProductType,
+} from '../../../../core/domain/product';
 
 /**
  *

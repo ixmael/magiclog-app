@@ -1,4 +1,6 @@
-import { UserType } from '../../../../core/domain/user/user';
+import {
+  UserType,
+} from '../../../../core/domain/user/user';
 
 /**
  * Fetch the user with the email given
@@ -7,13 +9,15 @@ import { UserType } from '../../../../core/domain/user/user';
  * @returns a UserType
  * @throws an error if the email not exists in the storage
  */
-const getByEmail = async (email: string, storage: Map<string, UserType>): Promise<UserType | null> => {
-    if (!storage.has(email)) {
-        // throw new Error('The user not exists');
-        return null;
-    }
+const getByEmail = async (email: string, storage: Array<UserType>): Promise<UserType | null> => {
+  let user: UserType | null = null;
 
-    return storage.get(email) as UserType;
+  const userSearched: UserType | undefined = storage.find((user) => user.email === email);
+  if (userSearched) {
+    user = userSearched;
+  }
+
+  return user;
 };
 
 export default getByEmail;

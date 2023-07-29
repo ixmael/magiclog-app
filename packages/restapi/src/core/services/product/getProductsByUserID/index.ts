@@ -1,13 +1,10 @@
-import { ProductType } from '../../../domain/product';
-
-/*
 import {
-  InvalidUserDataError,
-  EmailExistsError,
-} from '../../../domain/user/errors';
-*/
+  ProductType,
+} from '../../../domain/product';
 
-import { ProductServiceServicesType } from '../index';
+import {
+  ProductServiceServicesType,
+} from '../index';
 
 /**
  * Fetch the products stored

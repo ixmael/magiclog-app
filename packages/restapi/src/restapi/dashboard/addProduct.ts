@@ -1,14 +1,12 @@
 import express from 'express';
 
-import { ProductType } from '@/core/domain/product';
-/*
 import {
-  InvalidUserDataError,
-  EmailExistsError,
-} from '../../core/domain/user/errors';
-*/
+  ProductType,
+} from '@/core/domain/product';
 
-import { APIServices } from 'types';
+import {
+  APIServices,
+} from 'types';
 
 /**
  * Create a new product

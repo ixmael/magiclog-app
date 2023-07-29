@@ -1,6 +1,8 @@
 import express from 'express';
 
-import { UserAuthMiddleware } from '../middlewares/auth';
+import {
+  UserAuthMiddleware,
+} from '../middlewares/auth';
 
 import addProduct from './addProduct';
 import getMyProducts from './getMyProducts';

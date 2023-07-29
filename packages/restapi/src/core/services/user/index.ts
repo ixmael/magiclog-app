@@ -1,5 +1,9 @@
-import { UserServiceInterface } from '../../domain/user/service';
-import { UserRepositoryInterface } from '../../domain/user/repository';
+import {
+  UserServiceInterface,
+} from '../../domain/user/service';
+import {
+  UserRepositoryInterface,
+} from '../../domain/user/repository';
 
 import createANewUser from './createANewUser';
 import login from './login';
