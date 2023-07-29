@@ -19,7 +19,7 @@ const logger = {
 
 describe('Test filter products', () => {
   before((done) => {
-    initRepositories()
+    initRepositories(null)
       .then((repositories) => repositories.productRepository)
       .then((repository) => {
 

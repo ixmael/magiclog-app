@@ -5,6 +5,7 @@ import login from '../';
 import initRepositories from '../../../../../services/repositories/inmemory';
 
 import {
+  PublicUserType,
   UserType,
 } from '../../../../domain/user/user';
 
@@ -28,10 +29,11 @@ const logger = {
 
 describe('Test login', () => {
   before((done) => {
-    initRepositories()
+    initRepositories(null)
       .then((repositories) => repositories.userRepository)
       .then((repository) => {
         const user: UserType = {
+          id: 'usertologin@magiclog.mx',
           email: 'usertologin@magiclog.mx',
           passwordHashed: '$2b$11$2C6A0v59.Rqum4llsVf5Veva/IKp.xUmNIc0Fh3eJNiUNSb3THhGW',
         } as UserType;
@@ -75,8 +77,8 @@ describe('Test login', () => {
   });
 
   it('The password match', async () => {
-      const user: UserType = await login('usertologin@magiclog.mx', 'ThisAMoreComplicatedPassword', services as UserServiceServicesType);
+      const user: PublicUserType = await login('usertologin@magiclog.mx', 'ThisAMoreComplicatedPassword', services as UserServiceServicesType);
 
-      assert.equal(user.email, 'usertologin@magiclog.mx');
+      assert.equal(user.id, 'usertologin@magiclog.mx');
   });
 });

@@ -23,7 +23,7 @@ const logger = {
 
 describe('Test create a new user: the users', () => {
   before((done) => {
-    initRepositories()
+    initRepositories(null)
       .then((repositories) => repositories.userRepository)
       .then((repository) => {
         const user: UserType = {
