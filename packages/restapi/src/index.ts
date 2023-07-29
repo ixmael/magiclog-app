@@ -35,7 +35,18 @@ import restapiRoutes from './restapi';
 
   // Start the server
   const port = process.env.RESTAPI_PORT || 3000;
-  restapiServer.listen(port, () => {
+  const restapiServerExec = restapiServer.listen(port, () => {
     console.log(`The server started and listens in ${port}`);
   });
+
+  // Shutdown gracefully
+  const shutDown = () => {
+    restapiServerExec.close(() => {
+      services.close();
+      process.exit(0);
+    });
+  };
+
+  process.on('SIGTERM', shutDown);
+  process.on('SIGINT', shutDown);
 })();
