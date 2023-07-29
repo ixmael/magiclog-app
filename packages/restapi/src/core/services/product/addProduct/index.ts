@@ -15,7 +15,7 @@ import { ProductServiceServicesType } from '../index';
  * @param userRepository
  * @returns a ProductType
  */
-const addProduct = async (user: string, sku: string, price: number, services: ProductServiceServicesType): Promise<ProductType> => {
+const addProduct = async (user: string, name: string, sku: string, price: number, services: ProductServiceServicesType): Promise<ProductType> => {
   const productWithSameSKUExists = await services.repository.getByIDAndSKU(user, sku);
   if (productWithSameSKUExists) {
     const message = `There is a product with the same SKU '${sku}')`;
@@ -28,6 +28,7 @@ const addProduct = async (user: string, sku: string, price: number, services: Pr
     user,
     sku,
     price,
+    name,
   } as ProductType;
 
   // Store the user in the repository

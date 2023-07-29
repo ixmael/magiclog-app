@@ -17,7 +17,7 @@ export type ProductServiceServicesType = {
  */
 const ProductService = (services: ProductServiceServicesType): ProductServiceInterface => {
   return {
-    addProduct: (userId: string, sku: string, price: number): Promise<ProductType> => addProduct(userId, sku, price, services),
+    addProduct: (userId: string, name: string, sku: string, price: number): Promise<ProductType> => addProduct(userId, name, sku, price, services),
     getProductsByUserID: (userId: string): Promise<Array<ProductType>> => getProductsByUserID(userId, services),
   } as ProductServiceInterface;
 };

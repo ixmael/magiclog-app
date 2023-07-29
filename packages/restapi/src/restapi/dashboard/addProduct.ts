@@ -25,7 +25,8 @@ const addProduct = async (request: express.Request, response: express.Response) 
   // Validate the request data
   const requestProductData = request.body;
   if (!requestProductData.hasOwnProperty('sku')
-    || !requestProductData.hasOwnProperty('price')) {
+    || !requestProductData.hasOwnProperty('price')
+    || !requestProductData.hasOwnProperty('name')) {
     return response
       .status(400)
       .json({
@@ -38,7 +39,7 @@ const addProduct = async (request: express.Request, response: express.Response) 
   const services: APIServices = request.app.get('services');
   const product: ProductType | null = await services
     .productService
-    .addProduct(response.locals.user.id, requestProductData.sku, requestProductData.price)
+    .addProduct(response.locals.user.id, requestProductData.name, requestProductData.sku, requestProductData.price)
     .catch((_: any) => {
       response
         .status(500)
