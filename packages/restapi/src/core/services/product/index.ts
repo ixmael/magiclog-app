@@ -13,6 +13,7 @@ import {
 import addProduct from './addProduct';
 import getProductsByUserID from './getProductsByUserID';
 import filterProductsBy from './filterProductsBy';
+import filterFullProductsBy from './filterFullProductsBy';
 
 export type ProductServiceServicesType = {
   repository: ProductRepositoryInterface;
@@ -29,6 +30,7 @@ const ProductService = (services: ProductServiceServicesType): ProductServiceInt
     addProduct: (userId: string, name: string, sku: string, price: number): Promise<ProductType> => addProduct(userId, name, sku, price, services),
     getProductsByUserID: (userId: string): Promise<Array<ProductType>> => getProductsByUserID(userId, services),
     filterProductsBy: (filters: ProductFilterType): Promise<Array<PublicProductType>> => filterProductsBy(filters, services),
+    filterFullProductsBy: (filters: ProductFilterType): Promise<Array<ProductType>> => filterFullProductsBy(filters, services),
   } as ProductServiceInterface;
 };
 

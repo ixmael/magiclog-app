@@ -9,11 +9,15 @@ export type ProductType = {
   price: number;
 };
 
+/**
+ * Represents the filters to fetch products
+ */
 export type ProductFilterType = {
   name?: string;
   sku?: string;
   minPrice?: number;
   maxPrice?: number;
+  seller?: string;
 };
 
 /**

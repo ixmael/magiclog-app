@@ -26,6 +26,10 @@ const filterProductsBy = async (filters: ProductFilterType, storage: Array<Produ
       return false;
     }
 
+    if (filters.seller && filters.seller !== product.user) {
+      return false;
+    }
+
     return true;
   });
 };
