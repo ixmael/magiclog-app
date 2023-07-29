@@ -1,15 +1,20 @@
 import { assert } from 'chai';
 
-import createANewUser from '../';
+import login from '../';
 
 import initRepositories from '../../../../../services/repositories/inmemory';
 
 import {
-  EmailExistsError,
+  UserType,
+} from '../../../../domain/user/user';
+
+
+import {
+  EmailNotExistsError,
+  PasswordIsInvalidError,
 } from '../../../../domain/user/errors';
 
 import { UserServiceServicesType } from '../../index';
-import { UserType } from '../../../../domain/user/user';
 
 let services: UserServiceServicesType | null = null;
 const logger = {
@@ -21,14 +26,14 @@ const logger = {
   trace: (message: string) => { },
 };
 
-describe('Test create a new user: the users', () => {
+describe('Test login', () => {
   before((done) => {
     initRepositories()
       .then((repositories) => repositories.userRepository)
       .then((repository) => {
         const user: UserType = {
-          email: 'exists@magiclog.mx',
-          passwordHashed: 'thisisnotimportanttothistest',
+          email: 'usertologin@magiclog.mx',
+          passwordHashed: '$2b$11$2C6A0v59.Rqum4llsVf5Veva/IKp.xUmNIc0Fh3eJNiUNSb3THhGW',
         } as UserType;
         repository.storeAnUser(user);
 
@@ -49,13 +54,29 @@ describe('Test create a new user: the users', () => {
     done();
   });
 
-  it('The user exists in the repository', async () => {
+  it('The email is not registered', async () => {
     try {
-      await createANewUser('exists@magiclog.mx', 'avalidplainpassword', services as UserServiceServicesType);
+      await login('imnotregistered@magiclog.mx', 'asimplepassword', services as UserServiceServicesType);
 
       assert.exists(false); // Not reachable
     } catch (err: any) {
-      assert.isTrue(err instanceof EmailExistsError);
+      assert.isTrue(err instanceof EmailNotExistsError);
     }
+  });
+
+  it('The password not match', async () => {
+    try {
+      await login('usertologin@magiclog.mx', 'asimplepassword', services as UserServiceServicesType);
+
+      assert.exists(false); // Not reachable
+    } catch (err: any) {
+      assert.isTrue(err instanceof PasswordIsInvalidError);
+    }
+  });
+
+  it('The password match', async () => {
+      const user: UserType = await login('usertologin@magiclog.mx', 'ThisAMoreComplicatedPassword', services as UserServiceServicesType);
+
+      assert.equal(user.email, 'usertologin@magiclog.mx');
   });
 });

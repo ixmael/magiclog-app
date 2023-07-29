@@ -21,7 +21,7 @@ const logger = {
   trace: (message: string) => { },
 };
 
-describe('Test the email', () => {
+describe('Test create a new user: the email', () => {
   before((done) => {
     initRepositories()
       .then((repositories) => repositories.userRepository)
@@ -33,6 +33,11 @@ describe('Test the email', () => {
 
         done();
       });
+  });
+
+  after((done) => {
+    services = null;
+    done();
   });
 
   it('The email is empty', async () => {

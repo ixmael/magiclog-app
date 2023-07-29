@@ -75,6 +75,12 @@ const createAnUser = async (request: express.Request, response: express.Response
       .json({
         message: `The user with the email '${userWasCreated.email} was created'`,
       });
+  } else {
+    response
+      .status(500)
+      .json({
+        message: 'An unknown error occurred'
+      });
   }
 };
 

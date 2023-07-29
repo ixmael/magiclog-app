@@ -33,12 +33,50 @@ class EmailExistsError extends Error {
   }
 }
 
+/**
+ *
+ */
+class EmailNotExistsError extends Error {
+  constructor(msg: string) {
+    super(msg);
+    this.name = "EmailNotExistsError";
+
+    // Set the prototype explicitly.
+    Object.setPrototypeOf(this, EmailNotExistsError.prototype);
+  }
+
+  toString() {
+    return this.message;
+  }
+}
+
+/**
+ *
+ */
+class PasswordIsInvalidError extends Error {
+  constructor(msg: string) {
+    super(msg);
+    this.name = "PasswordIsInvalidError";
+
+    // Set the prototype explicitly.
+    Object.setPrototypeOf(this, PasswordIsInvalidError.prototype);
+  }
+
+  toString() {
+    return this.message;
+  }
+}
+
 export {
   InvalidUserDataError,
   EmailExistsError,
+  EmailNotExistsError,
+  PasswordIsInvalidError,
 };
 
 export default {
   InvalidUserDataError,
   EmailExistsError,
+  EmailNotExistsError,
+  PasswordIsInvalidError,
 };

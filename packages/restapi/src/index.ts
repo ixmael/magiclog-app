@@ -1,3 +1,4 @@
+import { exit } from 'process';
 import express from 'express';
 import * as dotenv from 'dotenv';
 
@@ -11,6 +12,13 @@ import restapiRoutes from './restapi';
 (async () => {
   // Load the environment variables
   dotenv.config();
+
+  // Required parameters
+  const restapiToken = process.env.RESTAPI_TOKEN;
+  if (!restapiToken) {
+    console.log('The RESTAPI_TOKEN environment variable cannot be empty');
+    exit(1);
+  }
 
   // Load the services
   const services = await initializeServices();

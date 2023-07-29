@@ -21,7 +21,7 @@ const logger = {
   trace: (message: string) => { },
 };
 
-describe('Test the password', () => {
+describe('Test create a new user: the password', () => {
   before((done) => {
     initRepositories()
       .then((repositories) => repositories.userRepository)
@@ -33,6 +33,11 @@ describe('Test the password', () => {
 
         done();
       });
+  });
+
+  after((done) => {
+    services = null;
+    done();
   });
 
   it('The password is empty', async () => {
