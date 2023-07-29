@@ -12,12 +12,12 @@ import ProductRepository from './product';
  * @returns RepositoriesServices
  */
 const initRepositories = async (services: any): Promise<RepositoriesServices> => {
-  const connection: mysql.Connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'example',
-    database: 'magiclog',
-  });
+  const uriConnection: string | any = process.env.REPOSITORY_CONNECTION;
+  if (!uriConnection) {
+    throw new Error('There is not the URI string to establish the connection');
+  }
+
+  const connection: mysql.Connection = await mysql.createConnection(uriConnection);
 
   return {
     userRepository: UserRepository(connection, services),
