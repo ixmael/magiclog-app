@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   ProductType,
 } from '../../../domain/product';
@@ -13,15 +15,12 @@ import {
  * @returns a ProductType
  */
 const addProduct = async (user: string, name: string, sku: string, price: number, services: ProductServiceServicesType): Promise<ProductType> => {
-  const productWithSameSKUExists = await services.repository.getByIDAndSKU(user, sku);
-  if (productWithSameSKUExists) {
-    const message = `There is a product with the same SKU '${sku}')`;
-    services.logger.error(message);
-    return Promise.reject(new Error(message));
-  }
+  // Check if the user exists
 
   // Prepare the user
   const product: ProductType = {
+    id: uuidv4(),
+    createdAt: Date.now(),
     user,
     sku,
     price,

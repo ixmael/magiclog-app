@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
 import {
@@ -50,18 +51,23 @@ const createANewUser = async (email: string, plainPassword: string, services: Us
 
   // Prepare the user
   const user: UserType = {
+    id: uuidv4(),
     email,
     passwordHashed,
+    createdAt: Date.now(),
   } as UserType;
 
   // Store the user in the repository
-  const userWasStored = await services.repository.storeAnUser(user);
-  if (!userWasStored) {
-    const message = `The user with the email '${email}' cannot be stored`;
-    services.logger.error(message);
-    return Promise.reject(new Error(message));
+  const storeStatus: boolean | EmailExistsError | Error = await services.repository.storeAnUser(user);
+
+  // Handle the result
+  if (storeStatus instanceof EmailExistsError) {
+    return Promise.reject(storeStatus);
+  } else if (storeStatus instanceof Error) {
+    return Promise.reject(new Error(`The user with the email '${email}' cannot be stored`));
   }
 
+  // The user was stored
   return user;
 };
 

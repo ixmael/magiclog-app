@@ -1,3 +1,5 @@
+import mysql from 'mysql2';
+
 import {
   ProductRepositoryInterface,
 } from '../../../../core/domain/product/repository';
@@ -15,12 +17,12 @@ import filterProductsBy from './filterProductsBy';
  * @param storage
  * @returns a object that implements ProductRepositoryInterface
  */
-const ProductRepositoryInMemory = (storage: Array<ProductType>): ProductRepositoryInterface => {
+const ProductRepository = (connection: any, services: any): ProductRepositoryInterface => {
   return {
-    addProduct: (product: ProductType): Promise<boolean> => addProduct(product, storage),
-    getProductsBy: (field: string, value: string) => getProductsBy(field, value, storage),
-    filterProductsBy: (filters: ProductFilterType) => filterProductsBy(filters, storage),
+    addProduct: (product: ProductType): Promise<boolean> => addProduct(product, connection, services),
+    getProductsBy: (field: string, value: string) => getProductsBy(field, value, connection, services),
+    filterProductsBy: (filters: ProductFilterType) => filterProductsBy(filters, connection, services),
   } as ProductRepositoryInterface;
 };
 
-export default ProductRepositoryInMemory;
+export default ProductRepository;

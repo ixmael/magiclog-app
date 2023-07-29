@@ -11,6 +11,7 @@ export type APIServices = {
   logger: any;
   productService: ProductServiceInterface;
   userService: UserServiceInterface;
+  close: () => {};
 };
 
 /**
@@ -19,4 +20,5 @@ export type APIServices = {
 export type RepositoriesServices = {
   userRepository: UserRepositoryInterface,
   productRepository: ProductRepositoryInterface,
+  close?: () => {},
 };

@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 
 import {
-  UserType,
+  PublicUserType,
 } from '@/core/domain/user/user';
 
 import {
@@ -39,10 +39,11 @@ const loginAnUser = async (request: express.Request, response: express.Response)
   const services: APIServices = request.app.get('services');
 
   // Create a new user
-  const userLogged: UserType | null = await services
+  const userLogged: PublicUserType | null = await services
     .userService
     .login(requestLoginUser.email, requestLoginUser.password)
     .catch((err) => {
+      console.log('orror', err);
       // There is an error with the data
       if (err instanceof EmailNotExistsError) {
         response
@@ -70,17 +71,17 @@ const loginAnUser = async (request: express.Request, response: express.Response)
 
   if (userLogged) {
     // Generate the JWT
-    const user = {
-      id: userLogged.email,
-      email: userLogged.email,
-    };
-    const accessToken = jwt.sign(user, process.env.RESTAPI_TOKEN as string, { expiresIn: '3600s' });
+    const accessToken = jwt.sign(userLogged,
+      process.env.RESTAPI_TOKEN as string,
+      {
+        expiresIn: '3600s',
+      });
 
     return response
       .header('auth-token', accessToken)
       .status(200)
       .json({
-        data: {
+        payload: {
           token: accessToken,
         },
       });

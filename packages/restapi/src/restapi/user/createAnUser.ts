@@ -49,14 +49,19 @@ const createAnUser = async (request: express.Request, response: express.Response
   const userWasCreated: UserType | null = await services
     .userService
     .createANewUser(requestUserData.email, requestUserData.password)
-    .catch((err) => {
+    .catch((err: Error) => {
       // There is an error with the data
-      if (err instanceof InvalidUserDataError
-        || err instanceof EmailExistsError) {
+      if (err instanceof InvalidUserDataError) {
         response
           .status(400)
           .json({
             message: 'The data is invalid',
+          });
+      } else if (err instanceof EmailExistsError) {
+        response
+          .status(400)
+          .json({
+            message: 'The email was registered',
           });
       } else {
         // An unknown error

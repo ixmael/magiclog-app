@@ -1,5 +1,6 @@
 import {
   UserType,
+  PublicUserType,
 } from './user';
 
 /**
@@ -7,5 +8,5 @@ import {
  */
 export interface UserServiceInterface {
   createANewUser: (email: string, plainPassword: string) => Promise<UserType>;
-  login: (email: string, plainPassword: string) => Promise<UserType>;
+  login: (email: string, plainPassword: string) => Promise<PublicUserType>;
 }

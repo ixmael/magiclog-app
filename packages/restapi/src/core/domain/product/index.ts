@@ -7,6 +7,7 @@ export type ProductType = {
   name: string;
   sku: string;
   price: number;
+  createdAt: number;
 };
 
 /**

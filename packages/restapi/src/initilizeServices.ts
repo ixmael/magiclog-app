@@ -4,7 +4,8 @@ import UserService, {
   UserServiceServicesType,
 } from './core/services/user';
 
-import initRepositories from './services/repositories/inmemory';
+import sqlInitRepositories from './services/repositories/sql';
+import inmemoryInitRepositories from './services/repositories/inmemory';
 
 import {
   APIServices,
@@ -24,7 +25,16 @@ const initializeServices = async (): Promise<APIServices> => {
   const logger = pino();
 
   // Init the repositories
-  const repositories: RepositoriesServices = await initRepositories();
+  let repositories: RepositoriesServices;
+  if (process.env.REPOSITORY === 'sql') {
+    repositories = await sqlInitRepositories({
+      logger,
+    });
+  } else {
+    repositories = await inmemoryInitRepositories({
+      logger,
+    });
+  }
 
   // Prepare the services
   const userRequiredServices: UserServiceServicesType = {
@@ -43,6 +53,14 @@ const initializeServices = async (): Promise<APIServices> => {
     logger,
     productService,
     userService,
+    close: () => {
+      console.log('closea');
+      if (repositories.close) {
+        console.log('closeb');
+        repositories.close();
+        console.log('closec');
+      }
+    },
   } as APIServices;
 };
 

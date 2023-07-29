@@ -19,7 +19,7 @@ const productStorage = new Array<ProductType>();
  * This initialize the repositories required
  * @returns RepositoriesServices
  */
-const initRepositories = async (): Promise<RepositoriesServices> => {
+const initRepositories = async (_: any): Promise<RepositoriesServices> => {
   return {
     userRepository: UserRepositoryInMemory(userStorage),
     productRepository: ProductRepositoryInMemory(productStorage),

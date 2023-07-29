@@ -24,7 +24,7 @@ const getMyProducts = async (request: express.Request, response: express.Respons
   const services: APIServices = request.app.get('services');
   const products: Array<ProductType> = await services
     .productService
-    .getProductsByUserID(response.locals.user);
+    .getProductsByUserID(response.locals.user.id);
 
   if (products) {
     return response

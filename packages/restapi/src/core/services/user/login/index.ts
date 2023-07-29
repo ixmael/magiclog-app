@@ -2,6 +2,7 @@ import { compareSync } from 'bcrypt';
 
 import {
   UserType,
+  PublicUserType,
 } from '../../../domain/user/user';
 
 import {
@@ -20,7 +21,7 @@ import {
  * @param userRepository
  * @returns a token
  */
-const login = async (email: string, plainPassword: string, services: UserServiceServicesType): Promise<UserType> => {
+const login = async (email: string, plainPassword: string, services: UserServiceServicesType): Promise<PublicUserType> => {
   // Fetch the user from the repository
   const user: UserType | null = await services.repository.getByEmail(email);
   if (!user) {
@@ -36,10 +37,9 @@ const login = async (email: string, plainPassword: string, services: UserService
     return Promise.reject(new PasswordIsInvalidError(message));
   }
 
-  // Hide the password
-  user.passwordHashed = '';
-
-  return user;
+  return {
+    id: user.id,
+  } as PublicUserType;
 };
 
 export default login;

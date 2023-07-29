@@ -14,8 +14,6 @@ import {
 const filterProductsBy = async (filters: ProductFilterType, services: ProductServiceServicesType): Promise<Array<PublicProductType>> => {
   const products = await services.repository.filterProductsBy(filters);
 
-  services.logger.info('filters', filters);
-
   // Transform the ProductType to PublicProductType
   const publicProducts: Array<PublicProductType> = products.map((internalProduct) => {
     const publicProduct: PublicProductType = {
