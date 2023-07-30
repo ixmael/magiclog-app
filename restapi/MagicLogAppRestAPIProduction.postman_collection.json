@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "b321c98a-d508-401c-92b2-ff7e48aa3716",
+		"name": "MagicLog App Production",
+		"description": "This connect to the RestAPI to provide the services required by the Magic Log test.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Dashboard",
+					"item": [
+						{
+							"name": "List all my products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{restapihost}}/dashboard/products/",
+									"host": [
+										"{{restapihost}}"
+									],
+									"path": [
+										"dashboard",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add a new product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sku\": \"reino-fuego-corona\",\n    \"name\": \"Corona del Rey Fuego\",\n    \"price\": 500\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{restapihost}}/dashboard/products/",
+									"host": [
+										"{{restapihost}}"
+									],
+									"path": [
+										"dashboard",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "This provide the services to the user.",
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ1YzgyODllLTVmZDctNDcxMC04NWFjLTk4YTRmYzMzNjEzZCIsImlhdCI6MTY5MDc1ODk1NSwiZXhwIjoxNjkwNzYyNTU1fQ.zReoIbLqQH7GM56bNU7ZKL7TVnTSOH0GdnJQ2Sqgb9E",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Create a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"reyfenix@ciudaddelsol.mx\",\n    \"password\": \"voyaconquistaralmundo\",\n    \"passwordToMatch\": \"voyaconquistaralmundo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{restapihost}}/users",
+							"host": [
+								"{{restapihost}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"reyfenix@ciudaddelsol.mx\",\n    \"password\": \"voyaconquistaralmundo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{restapihost}}/users/login",
+							"host": [
+								"{{restapihost}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This consumes the services for the user (the seller)."
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "List and filters products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{restapihost}}/products/?maxPrice=2000",
+							"host": [
+								"{{restapihost}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "2000",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "2000"
+								},
+								{
+									"key": "sku",
+									"value": "oeu",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This provides the public services."
+		},
+		{
+			"name": "Managers",
+			"item": [
+				{
+					"name": "List all products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJleWZlbml4IiwiaWF0IjoxNjkwNzU5MzgxLCJleHAiOjE2OTA3NjI5ODF9.RtaZ9MnpqcLyFBMQ4q8kOMt8O0JseU4_zjeextzexeQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{restapihost}}/admin/products?seller=44bf6e39-1c59-43a7-8b36-2b407ba48cfe",
+							"host": [
+								"{{restapihost}}"
+							],
+							"path": [
+								"admin",
+								"products"
+							],
+							"query": [
+								{
+									"key": "seller",
+									"value": "44bf6e39-1c59-43a7-8b36-2b407ba48cfe"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manager login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"reyfenix\",\n    \"password\": \"ozai\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{restapihost}}/admin/login",
+							"host": [
+								"{{restapihost}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This provide services to the admins."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "restapihost",
+			"value": "https://magiclog.irm.mx",
+			"type": "default"
+		}
+	]
+}
