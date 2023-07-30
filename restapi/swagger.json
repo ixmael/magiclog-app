@@ -16,7 +16,7 @@
     },
     "servers": [
       {
-        "url": "https://magiclog.irm.mx/restapi"
+        "url": "https://magiclog.irm.mx"
       }
     ]
   },
