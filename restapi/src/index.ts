@@ -30,36 +30,10 @@ import restapiRoutes from './restapi';
   const restapiServer = express();
   restapiServer.use(express.json());
 
-  const options = {
-    definition: {
-      openapi: "3.1.0",
-      info: {
-        title: "MagicLog App RestAPI",
-        version: "0.0.1",
-        description: 'This is the implementation of the MagicLog App Test',
-        license: {
-          name: "MIT",
-          url: "https://spdx.org/licenses/MIT.html",
-        },
-        contact: {
-          name: "ixmael",
-          email: "hola@irm.mx",
-        },
-      },
-      servers: [
-        {
-          url: "http://localhost:3000",
-        },
-      ],
-    },
-    apis: [
-      './src/restapi/**/*.ts',
-    ],
-  };
-
-  const specs = swaggerJsdoc(options);
+  // Set the swagger documentation endpoint
+  const specs = swaggerJsdoc(services.swaggerOptions);
   restapiServer.use(
-    '/restapi/docs',
+    '/restapi',
     swaggerUi.serve,
     swaggerUi.setup(specs),
   );

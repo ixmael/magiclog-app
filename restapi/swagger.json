@@ -1,0 +1,26 @@
+{
+  "definition": {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "MagicLog App RestAPI",
+      "version": "0.0.1",
+      "description": "This is the implementation of the MagicLog App Test",
+      "license": {
+        "name": "MIT",
+        "url": "https://spdx.org/licenses/MIT.html"
+      },
+      "contact": {
+        "name": "ixmael",
+        "email": "hola@irm.mx"
+      }
+    },
+    "servers": [
+      {
+        "url": "https://magiclog.irm.mx/restapi"
+      }
+    ]
+  },
+  "apis": [
+    "./src/restapi/**/*.ts"
+  ]
+}

@@ -51,7 +51,7 @@ const router = express.Router();
  *                     products:
  *                       type: array
  *                       items:
- *                         $ref: '#/components/schemas/Product'
+ *                         $ref: '#/components/schemas/PublicProduct'
  *                       description: The list of the filtered products
  *       5XX:
  *         description: An error occured in the restapi

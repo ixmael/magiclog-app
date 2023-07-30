@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import pino from 'pino';
 
 import UserService, {
@@ -36,6 +37,14 @@ const initializeServices = async (): Promise<APIServices> => {
     },
   });
   const logger = pino({}, fileTransport);
+
+  // Load the swagger options
+  const swaggerOptions = await fs.readFile('./swagger.json', {
+    encoding: 'utf-8',
+  })
+    .then((data) => {
+      return JSON.parse(data.toString());
+    });
 
   // Init the repositories
   let repositories: RepositoriesServices;
@@ -77,6 +86,7 @@ const initializeServices = async (): Promise<APIServices> => {
     productService,
     userService,
     managerService,
+    swaggerOptions,
     close: async () => {
       if (repositories.close) {
         await repositories.close();

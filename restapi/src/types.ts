@@ -14,6 +14,7 @@ export type APIServices = {
   productService: ProductServiceInterface;
   userService: UserServiceInterface;
   managerService: ManagerServiceInterface;
+  swaggerOptions: any;
   close: () => {};
 };
 
