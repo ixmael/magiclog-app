@@ -3,6 +3,11 @@ resource "docker_container" "repository" {
   image    = "mysql:8.0.34"
   hostname = "repository.magiclog"
 
+  attach   = false
+  must_run = true
+  logs     = true
+  restart  = "unless-stopped"
+
   env = [
     "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
     "ENVIRONMENT=${var.environment}",

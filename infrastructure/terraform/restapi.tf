@@ -3,6 +3,11 @@ resource "docker_container" "restapi" {
   image    = docker_image.restapi.name
   hostname = "restapi.magiclog"
 
+  attach   = false
+  must_run = true
+  logs     = true
+  restart  = "unless-stopped"
+
   depends_on = [
     docker_container.repository
   ]
