@@ -12,6 +12,7 @@
   "scripts": {
     "restapi": "ts-node src/index.ts",
     "restapi:develop": "nodemon src/index.ts",
+    "manager:add": "ts-node scripts/manager.ts",
     "tests": "npm run tests:unittests",
     "tests:unittests": "ts-mocha -p ./tsconfig.test.json -r tsconfig-paths/register src/**/tests/**/*.spec.ts"
   },

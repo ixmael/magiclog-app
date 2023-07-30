@@ -1,6 +1,7 @@
 CREATE TABLE `products` (
   `id` varchar(255) NOT NULL,
   `seller_id` varchar(255) NOT NULL,
+  `sku` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `created_at` bigint NOT NULL,

@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
 
 import {
   UserType,
@@ -43,11 +42,7 @@ const createANewUser = async (email: string, plainPassword: string, services: Us
     return Promise.reject(new EmailExistsError(message));
   }
 
-  const passwordHashed: string = await bcrypt
-    .genSalt(10)
-    .then((salt: any) => bcrypt.hash(plainPassword, salt))
-    .then((hash: any) => hash)
-    .catch((err: any) => services.logger.error(err));
+  const passwordHashed: string = await services.crypt.getHash(plainPassword);
 
   // Prepare the user
   const user: UserType = {

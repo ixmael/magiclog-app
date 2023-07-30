@@ -11,6 +11,7 @@ import login from './login';
 export type UserServiceServicesType = {
   repository: UserRepositoryInterface;
   logger: any;
+  crypt: any;
 };
 
 /**

@@ -1,17 +1,15 @@
 import express from 'express';
 
-/*
 import {
   UserAuthMiddleware,
 } from '../middlewares/auth';
-*/
 
 import filterProducts from './filterProducts';
+import loginManager from './loginManager';
 
 const router = express.Router();
 
-// router.use(UserAuthMiddleware);
-
-router.get('/', filterProducts);
+router.post('/login', loginManager);
+router.get('/', UserAuthMiddleware, filterProducts);
 
 export default router;

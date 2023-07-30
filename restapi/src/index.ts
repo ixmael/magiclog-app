@@ -41,8 +41,8 @@ import restapiRoutes from './restapi';
 
   // Shutdown gracefully
   const shutDown = () => {
-    restapiServerExec.close(() => {
-      services.close();
+    restapiServerExec.close(async () => {
+      await services.close();
       process.exit(0);
     });
   };

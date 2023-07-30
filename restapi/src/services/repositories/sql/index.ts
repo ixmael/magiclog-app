@@ -22,8 +22,9 @@ const initRepositories = async (services: any): Promise<RepositoriesServices> =>
   return {
     userRepository: UserRepository(connection, services),
     productRepository: ProductRepository(connection, services),
-    close: () => {
-      connection.end();
+    close: async () => {
+      await connection.end();
+      services.logger.info('The the MySQL connection was closed');
     },
   } as RepositoriesServices;
 };

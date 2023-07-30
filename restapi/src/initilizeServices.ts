@@ -6,15 +6,22 @@ import UserService, {
 
 import sqlInitRepositories from './services/repositories/sql';
 import inmemoryInitRepositories from './services/repositories/inmemory';
+import initManagerRepository from './services/repositories/manager';
+
+import ProductService, {
+  ProductServiceServicesType,
+} from './core/services/product';
+
+import ManagerService, {
+  ManagerServiceServicesType,
+} from './core/services/manager';
+
+import crypt from './services/utils/crypt';
 
 import {
   APIServices,
   RepositoriesServices,
 } from './types';
-
-import ProductService, {
-  ProductServiceServicesType,
-} from './core/services/product';
 
 /**
  * Init the services required by the app
@@ -36,29 +43,37 @@ const initializeServices = async (): Promise<APIServices> => {
     });
   }
 
+  // Init the manager repository
+  repositories.managerRepository = await initManagerRepository();
+
   // Prepare the services
   const userRequiredServices: UserServiceServicesType = {
     repository: repositories.userRepository,
-    logger: logger,
+    logger,
+    crypt,
   } as UserServiceServicesType;
   const userService = UserService(userRequiredServices);
 
   const productRequiredServices: ProductServiceServicesType = {
     repository: repositories.productRepository,
-    logger: logger,
+    logger,
   } as ProductServiceServicesType;
   const productService = ProductService(productRequiredServices);
+
+  const managerRequiredServices: ManagerServiceServicesType = {
+    repository: repositories.managerRepository,
+    logger,
+  };
+  const managerService = ManagerService(managerRequiredServices);
 
   return {
     logger,
     productService,
     userService,
+    managerService,
     close: () => {
-      console.log('closea');
       if (repositories.close) {
-        console.log('closeb');
         repositories.close();
-        console.log('closec');
       }
     },
   } as APIServices;
