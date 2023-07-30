@@ -2,9 +2,11 @@
 # Project
 #
 # No accept all the hidden directories
-.*
+/.*
 # Allow examples of environment variables files
 !.env.example
+
+.terraform.lock.hcl
 
 #
 # Terraform
