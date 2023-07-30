@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "main": "index.js",
   "type": "module",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "ixmael",
+    "email": "hola@irm.mx"
+  },
   "scripts": {
     "restapi": "ts-node src/index.ts",
     "restapi:develop": "nodemon src/index.ts",

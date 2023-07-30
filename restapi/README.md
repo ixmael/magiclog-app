@@ -14,6 +14,12 @@ npm install
 ```
 
 ### Migrations
+I write initial queries for the mysql database. The migrations are in the *migrations* path. You can execute each of the migration files (name_of_the_file.up.sql) copying and pasting.
+
+I use [migrate](https://github.com/golang-migrate/migrate) to automatize this task. You can install the binary and run the migrations with:
+```sh
+migrate -path ./migrations -database mysql://root:example@/databasename up
+```
 
 ### Environment variables
 
