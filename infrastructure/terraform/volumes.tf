@@ -3,7 +3,6 @@ resource "docker_volume" "repository" {
   driver_opts = {
     type   = "none"
     device = var.repository_path_to_keep_data
-    // ${path.cwd}/logs/reverseproxy
     o      = "bind"
   }
 }

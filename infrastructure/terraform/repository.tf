@@ -17,4 +17,11 @@ resource "docker_container" "repository" {
     volume_name    = docker_volume.repository.name
     container_path = "/var/lib/mysql"
   }
+
+  networks_advanced {
+    name = docker_network.magiclog.name
+    aliases = [
+      "repository"
+    ]
+  }
 }
