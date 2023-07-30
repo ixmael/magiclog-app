@@ -2,7 +2,7 @@ import express from 'express';
 
 import {
   UserType,
-} from '@/core/domain/user/user';
+} from '../../core/domain/user/user';
 
 import {
   InvalidUserDataError,

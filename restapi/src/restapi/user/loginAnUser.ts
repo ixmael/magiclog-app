@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import {
   PublicUserType,
-} from '@/core/domain/user/user';
+} from '../../core/domain/user/user';
 
 import {
   EmailNotExistsError,

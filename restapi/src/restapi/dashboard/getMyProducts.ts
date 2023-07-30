@@ -2,7 +2,7 @@ import express from 'express';
 
 import {
   ProductType,
-} from '@/core/domain/product';
+} from '../../core/domain/product';
 
 import {
   APIServices,

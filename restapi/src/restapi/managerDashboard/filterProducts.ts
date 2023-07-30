@@ -3,7 +3,7 @@ import express from 'express';
 import {
   ProductType,
   ProductFilterType,
-} from '@/core/domain/product';
+} from '../../core/domain/product';
 
 import {
   APIServices,

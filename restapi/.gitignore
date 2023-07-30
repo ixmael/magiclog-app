@@ -1,4 +1,7 @@
 .env
+managers.json
+dist
+src/**/*.js
 
 # Logs
 logs
