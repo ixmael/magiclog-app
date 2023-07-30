@@ -3,12 +3,6 @@ variable "environment" {
   description = "The environment"
   default     = "production"
 }
-
-variable "host" {
-  type        = string
-  description = "The host"
-}
-
 variable "mysql_root_password" {
   type        = string
   description = "The password for the root user"
