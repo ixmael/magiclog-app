@@ -12,7 +12,7 @@ import ProductRepository from './product';
  * @returns RepositoriesServices
  */
 const initRepositories = async (services: any): Promise<RepositoriesServices> => {
-  const uriConnection: string | any = process.env.REPOSITORY_CONNECTION;
+  const uriConnection: string | any = process.env.REPOSITORY_URI;
   if (!uriConnection) {
     throw new Error('There is not the URI string to establish the connection');
   }
