@@ -22,13 +22,6 @@ resource "docker_container" "restapi" {
       "restapi"
     ]
   }
-
-  networks_advanced {
-    name = "bridge"
-    aliases = [
-      "restapi"
-    ]
-  }
 }
 
 resource "docker_image" "restapi" {
