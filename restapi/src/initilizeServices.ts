@@ -29,7 +29,13 @@ import {
  */
 const initializeServices = async (): Promise<APIServices> => {
   // Start the logger service
-  const logger = pino();
+  const fileTransport = pino.transport({
+    target: 'pino/file',
+    options: {
+      destination: './restapi.log',
+    },
+  });
+  const logger = pino({}, fileTransport);
 
   // Init the repositories
   let repositories: RepositoriesServices;
@@ -71,10 +77,12 @@ const initializeServices = async (): Promise<APIServices> => {
     productService,
     userService,
     managerService,
-    close: () => {
+    close: async () => {
       if (repositories.close) {
-        repositories.close();
+        await repositories.close();
       }
+
+      logger.info('The services are stopped');
     },
   } as APIServices;
 };

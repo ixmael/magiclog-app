@@ -2,6 +2,9 @@ import { exit } from 'process';
 import express from 'express';
 import * as dotenv from 'dotenv';
 
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
 import initializeServices from './initilizeServices';
 
 import restapiRoutes from './restapi';
@@ -26,6 +29,40 @@ import restapiRoutes from './restapi';
   // Prepare the server
   const restapiServer = express();
   restapiServer.use(express.json());
+
+  const options = {
+    definition: {
+      openapi: "3.1.0",
+      info: {
+        title: "MagicLog App RestAPI",
+        version: "0.0.1",
+        description: 'This is the implementation of the MagicLog App Test',
+        license: {
+          name: "MIT",
+          url: "https://spdx.org/licenses/MIT.html",
+        },
+        contact: {
+          name: "ixmael",
+          email: "hola@irm.mx",
+        },
+      },
+      servers: [
+        {
+          url: "http://localhost:3000",
+        },
+      ],
+    },
+    apis: [
+      './src/restapi/**/*.ts',
+    ],
+  };
+
+  const specs = swaggerJsdoc(options);
+  restapiServer.use(
+    '/restapi/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(specs),
+  );
 
   // Add services to the server
   restapiServer.set('services', services);

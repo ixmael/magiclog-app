@@ -1,5 +1,7 @@
 # RestAPI
-This a RestAPI that implements the users histories given in the 'magicLog12023_TEST' file.
+This is the RestAPI that implements the users histories given in the 'magicLog12023_TEST' file.
+
+You can read the [introduction](docs/INTRODUCTION.md) to know how I implemented this application.
 
 ## Setup
 
