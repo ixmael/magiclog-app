@@ -1,7 +1,11 @@
 resource "docker_container" "restapi" {
-  name = "${local.project_name}-restapi-${var.environment}"
+  name     = "${local.project_name}-restapi-${var.environment}"
   image    = docker_image.restapi.name
   hostname = "restapi.magiclog"
+
+  depends_on = [
+    docker_container.repository
+  ]
 
   env = [
     "ENVIRONMENT=${var.environment}",
