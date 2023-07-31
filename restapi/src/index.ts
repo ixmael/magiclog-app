@@ -1,5 +1,6 @@
 import { exit } from 'process';
 import express from 'express';
+import cors from 'cors';
 import * as dotenv from 'dotenv';
 
 import swaggerJsdoc from 'swagger-jsdoc';
@@ -28,6 +29,7 @@ import restapiRoutes from './restapi';
 
   // Prepare the server
   const restapiServer = express();
+  restapiServer.use(cors());
   restapiServer.use(express.json());
 
   // Set the swagger documentation endpoint
