@@ -1,0 +1,34 @@
+# Start production
+FROM node:16-alpine as base
+
+COPY ./restapi /restapi
+WORKDIR /restapi
+
+RUN yarn install \
+    && yarn build
+
+#
+# FROM node:16
+
+# RUN yarn run tests
+
+#
+FROM node:16-alpine
+
+COPY ./restapi/.env /restapi/.env
+COPY ./restapi/managers.json /restapi/managers.json
+COPY ./restapi/restapi.yml /restapi/restapi.yml
+COPY ./restapi/swagger.json /restapi/swagger.json
+COPY ./restapi/package.json /restapi/package.json
+
+
+COPY --from=base /restapi/dist /restapi/dist
+WORKDIR /restapi
+
+RUN yarn install --production
+
+ENTRYPOINT ["yarn"]
+CMD ["restapi"]
+
+# ENTRYPOINT ["tail"]
+# CMD ["-f", "/dev/null"]

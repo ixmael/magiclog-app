@@ -34,8 +34,8 @@ resource "docker_image" "restapi" {
 
   build {
     path       = abspath(path.cwd)
-    dockerfile = "./infrastructure/docker/restapi.Dockerfile"
-
+    dockerfile = "./infrastructure/docker/restapi/dockerfile"
+    // context    = path.cwd
 
     tag = [
       "${var.environment}"

@@ -16,11 +16,16 @@
     },
     "servers": [
       {
-        "url": "https://magiclog.irm.mx"
+        "url": "http://localhost:3000",
+        "description": "The development server"
+      },
+      {
+        "url": "https://magiclog.irm.mx",
+        "description": "The production server"
       }
     ]
   },
   "apis": [
-    "./src/restapi/**/*.ts"
+    "./restapi.yml"
   ]
 }
