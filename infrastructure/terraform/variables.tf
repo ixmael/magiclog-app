@@ -8,6 +8,11 @@ variable "mysql_root_password" {
   description = "The password for the root user"
 }
 
+variable "repository_database" {
+  type = string
+  description = "The database in the repository"
+}
+
 variable "repository_path_to_keep_data" {
   type        = string
   description = "The path to store repository data"

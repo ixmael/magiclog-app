@@ -39,3 +39,9 @@ You can delete all the items created (networks, containers, etc.) by *terraform*
 ```sh
 terraform -chdir=./infrastructure/terraform destroy
 ```
+
+## Migrations
+Run the migrations
+```sh
+docker run -v `pwd`/restapi/migrations:/migrations --network YOURNETWORK migrate/migrate -path=/migrations/ -database 'mysql://root:example@tcp(repository:3306)/magiclog' up
+```
